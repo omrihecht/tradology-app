@@ -1,0 +1,5 @@
+﻿git help:
+
+https://code.tutsplus.com/tutorials/quick-tip-how-to-work-with-github-and-multiple-accounts--net-22574
+git remote add origin git@github-hooligans:omrihecht/tradology-app
+
