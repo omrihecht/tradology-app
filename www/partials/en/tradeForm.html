@@ -1,0 +1,58 @@
+
+<div id="trade-form-page">
+	<div class="scroll-content"> 
+    
+        <form id="trade-form" method="post" ng-show="!showThanks">
+        	<h2>Ready for the next step?</h2>
+            <h2>Fill your details & download the <img class="colmex-pro-logo" src="images/logo-colmex-pro.png" alt="Colmex Pro" /> demo</h2>
+            
+            <div class="form-field">
+            	<label for="first-name">First name</label>
+                <input ng-class="{ 'required' : validation.fnameErr }" ng-model="tradeForm.fname" id="first-name" name="first_name" type="text">
+                <p ng-bind-html="validation.fnameErr_txt" class="error"></p> 
+            </div>
+            
+            <div class="form-field">
+            	<label for="last-name">Last name</label>
+                <input ng-class="{ 'required' : validation.lnameErr }" ng-model="tradeForm.lname" id="last-name" name="lname" type="text">
+                <p ng-bind-html="validation.lnameErr_txt" class="error"></p> 
+            </div> 
+            
+            <div class="form-field">
+            	<label for="email">Email</label>
+                <input ng-class="{ 'required' : validation.emailErr }" ng-model="tradeForm.email" id="email" name="email" type="email">
+                <p ng-bind-html="validation.emailErr_txt" class="error"></p> 
+            </div>            
+            
+            <div class="form-field">
+            	<label for="country">Country</label>
+                <select id="country" ng-change="updateCountry()" ng-options="country as country.name for country in countryCodes.list track by country.iso2" ng-model="countryCodes.selectedCountry" ng-class="{ 'required' : validation.countryErr }" ></select>
+                <span class="arrow fa fa-chevron-down"></span>
+                <p class="error" ng-bind-html="validation.countryErr_txt"></p>
+            </div>                          
+            
+            <div class="form-field">
+				<label for="phone">Telephone</label>
+                <input ng-class="{ 'required' : validation.phoneErr }" ng-model="tradeForm.phone" id="phone" name="phone" type="tel">
+                <p ng-bind-html="validation.phoneErr_txt" class="error"></p> 
+            </div>
+            
+            <div class="checkbox" ng-class="{ 'required' : validation.cbErr }">
+                <input id="checkbox" type="checkbox" ng-model="tradeForm.approve" ng-true-value="'1'" ng-false-value="'0'" >
+                <label for="checkbox"><span>I agree to receive Educational materials from Colmex Pro.</span></label>
+            </div>
+            <p ng-bind-html="validation.cbErr_txt" class="error"></p>            
+           
+            <button id="send-btn" class="form-btn" ng-click="submitFormClick();">Send</button>
+            
+            <p class="disclaimer">* The demo can only be operated from a desktop computer.</p>
+                        
+        </form>
+                
+        <div class="thanks">
+            <h2 ng-bind-html="form_return_msg" ></h2>
+        </div>
+        
+	</div>
+</div>
+

@@ -1,0 +1,60 @@
+<div id="login-form-page">
+
+    
+    <div class="scroll-content">
+    
+    	<form id="login-form" novalidate>
+        
+            <button ng-click="fbConnectClick();" id="facebook-connect">Login with Facebook <span class="icon-facebook"><span class="fa fa-facebook"></span></span></button>
+            <p class="or">Or fill in your details:</p>
+            
+            <div class="form-field">
+            	<label for="first-name">First name</label>
+                <input id="first-name" type="text" ng-model="userData.fname" ng-class="{ 'required' : validation.fnameErr }" />
+                <p class="error" ng-bind-html="validation.fnameErr_txt"></p>
+            </div>
+            
+            <div class="form-field">
+            	<label for="last-name">Last name</label> 
+                <input id="last-name" type="text" ng-model="userData.lname" ng-class="{ 'required' : validation.lnameErr }" />
+                <p class="error" ng-bind-html="validation.lnameErr_txt"></p>  
+            </div>
+            
+            <div class="form-field">
+            	<label for="user-mail">Email</label>
+                <input id="user-mail" type="email" ng-model="userData.email" ng-class="{ 'required' : validation.emailErr }" />
+                <p class="error" ng-bind-html="validation.emailErr_txt"></p>
+            </div>
+            
+            <div class="form-field">
+            	<label for="country">Country</label>
+                <select id="country" ng-change="updateCountry()" ng-options="country as country.name for country in countryCodes.list track by country.iso2" ng-model="countryCodes.selectedCountry" ng-class="{ 'required' : validation.countryErr }" ></select>
+                <span class="arrow fa fa-chevron-down"></span>
+                <p class="error" ng-bind-html="validation.countryErr_txt"></p>
+            </div>            
+            
+            <div class="form-field">
+            	<label for="phone">Telephone</label>
+                <input ng-model="userData.phone" id="phone" name="phone" type="tel" ng-class="{ 'required' : validation.phoneErr }" >
+                <p class="error" ng-bind-html="validation.phoneErr_txt"></p>
+            </div>
+            
+			<div class="radio-fields" >
+                <input id="gender-male" type="radio" name="gender" value="male">
+                <label for="gender-male"><span><span></span></span>Male</label>                    
+                <input id="gender-female" type="radio" name="gender" value="female">
+                <label for="gender-female"><span><span></span></span>Female</label>                            	
+            </div>            
+            
+            <div class="checkbox" ng-class="{ 'required' : validation.cbErr }">
+                <input id="checkbox" type="checkbox" ng-model="userData.approve" ng-true-value="'1'" ng-false-value="'0'">
+                <label for="checkbox"><span>In order to listen to all the tutorials, you must agree to receive advertising materials from Colmex.</span></label>
+            </div>
+            <p class="error cb-error" ng-bind-html="validation.cbErr_txt"></p>
+         
+            <button id="login-btn" class="form-btn" ng-click="loginClick();">Login</button>
+            
+		</form>
+    </div>
+    
+</div>

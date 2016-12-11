@@ -1,0 +1,81 @@
+﻿cordova create #APP_NAME
+cordova platform add #PLATFORM_NAME (android | ios)
+cordova platform rm #PLATFORM_NAME ( removes the platform )
+cordova prepare - (updates the app)
+cordova build #PLATFORM_NAME
+cordova build --release (for production purpose )
+cordova run android (or windows phone) - runs the app on the device
+cordova run android -- --minSdkVersion=20
+adb devices (check device connections) - android
+adb kill-server
+
+plugins:
+
+cordova plugin add cordova-plugin-device
+cordova plugin add phonegap-plugin-push --variable SENDER_ID="XXXXXXX"
+tradlogy id = 359124208994
+cordova plugin add phonegap-plugin-push --variable SENDER_ID=359124208994
+cordova plugin add cordova-plugin-x-socialsharing
+cordova plugin add cordova-plugin-sim
+cordova plugin add cordova-plugin-customurlscheme --variable URL_SCHEME=com.colmexpodcast
+
+after installing plugin do - cordova prepare || cordoba run
+
+last plugin
+cordova plugin add cordova-plugin-sim@latest --save
+
+
+for android push:
+for the google developer console you need SHA1
+keytool -genkey -v -keystore <keystoreName>.keystore -alias <Keystore AliasName> -keyalg <Key algorithm> -keysize <Key size> -validity <Key Validity in Days>
+
+colmexpodcast:
+keytool -genkey -v -keystore colmexpodcast.keystore -alias colmexpodcast -keyalg RSA -keysize 2048 -validity 10000
+keytool -list -v -keystore colmexpodcast.keystore
+SHA1: CC:3A:4B:45:A7:82:95:29:1C:C8:FC:2E:F9:6E:53:C4:54:FF:BB:E5  - for console google api
+
+then you get this:
+google API KEY from google console AIP : AIzaSyA8wkVxDlV9lVup5m-39ak-i3I7eKdXXeE
+
+
+TRADOLOGY:
+keytool -genkey -v -keystore tradology.keystore -alias tradology -keyalg RSA -keysize 2048 -validity 10000
+keytool -list -v -keystore tradology.keystore
+keytool -exportcert -alias tradology -keystore tradology.keystore -list -v
+SHA1: DB:BB:77:AC:3A:FB:E0:44:7B:63:EC:49:42:C8:0F:B9:CD:74:C1:F2
+TRADOLOGY API KEY : AIzaSyDVsLz48y_Ovb5ESARsYqGY9bM53NritwM
+
+Android Keystore:
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore tradology.keystore tradology.apk tradology
+
+inside the app:
+push registrationID for user : fYRAZ_EiDrA:APA91bHiXMrF-ODCPQqPgFaK6G-HL6BtO35Fcm3kJKSnaRDa1_K9kyuju4HkDtol65lx6Csp_fAfICgSA50_Ipxg7wf7c-F3_y5BTcA6PvpmCjiAQ5PpVpQ68F0p6DO4p3ac0Dwnp5nf
+
+https://github.com/jeduan/cordova-plugin-facebook4
+
+cordova plugin add --save cordova-plugin-facebook4 --variable APP_ID="796440650460461" --variable APP_NAME="colmexpodcast"
+cordova plugin add cordova-plugin-facebook4 --save --variable APP_ID="1741199836124292" --variable APP_NAME="Tradology"
+cordova plugin rm cordova-plugin-facebook4
+
+cordova -d plugin add phonegap-facebook-plugin --variable APP_ID="1741199836124292" --variable APP_NAME="Tradology"
+cordova -d plugin rm phonegap-facebook-plugin
+
+colmexpodcast:
+keytool -exportcert -alias androiddebugkey -keystore colmexpodcast.keystore  | openssl sha1 -binary | openssl base64
+NfgDlIG7XWJzUZRUL+bZySrMX1Q=
+
+tradology:
+keytool -exportcert -alias androiddebugkey -keystore tradology.keystore  | openssl sha1 -binary | openssl base64
+keytool -exportcert -alias androidreleasekey -keystore tradology.keystore  | openssl sha1 -binary | openssl base64
+NfgDlIG7XWJzUZRUL+bZySrMX1Q=
+27t3rDr74ER7Y+xJQsgPuc10wfl=
+Ql6f1KiQPXBzegr50ajKXBcOvzQ=
+
+
+
+IOS share changes:
+Tradology-Info.plist
+
+
+
+

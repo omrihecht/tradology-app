@@ -1,0 +1,18 @@
+{
+	"android": {
+		"debug": {
+			"keystore": "tradology.keystore",
+			"storePassword": "TRADOLOGY",
+			"alias": "tradology",
+			"password" : "TRADOLOGY",
+			"keystoreType": ""
+		},
+		"release": {
+			"keystore": "tradology.keystore",
+			"storePassword": "TRADOLOGY",
+			"alias": "tradology",
+			"password" : "TRADOLOGY",
+			"keystoreType": ""
+		}
+	}
+}

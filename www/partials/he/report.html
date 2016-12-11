@@ -1,0 +1,26 @@
+
+<div id="report-form-page">
+
+	<div class="scroll-content">   
+    
+        <form id="report-form" ng-show="!showThanks" method="post">
+            
+            <div class="form-field">
+            	<label for="report-text">דווח על תקלה</label>
+                <textarea ng-class="{ 'required' : validation.reportErr }" ng-model="reportForm.comments" id="report-text" name="report_text"></textarea>
+                <p ng-bind-html="validation.reportErr_txt" class="error"></p> 
+            </div>
+            
+        	<div ng-bind-html="device_details" class="device-details"></div>
+            
+            <button id="send-btn" class="form-btn" ng-click="submitFormClick();">שלח</button>
+                                    
+        </form>
+                
+        <div ng-show="showThanks" class="thanks">
+            <h2 ng-bind-html="form_return_msg" ></h2>
+        </div>
+        
+	</div>
+</div>
+

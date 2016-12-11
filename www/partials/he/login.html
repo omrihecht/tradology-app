@@ -1,0 +1,53 @@
+<div id="login-form-page">
+
+    
+    <div class="scroll-content">
+    
+    	<form id="login-form" novalidate>
+        
+            <button ng-click="fbConnectClick();" id="facebook-connect">התחבר דרך Facebook <span class="icon-facebook"><span class="fa fa-facebook"></span></span></button>
+            <p class="or">או מלא את הפרטים:</p>
+            
+            <div class="form-field">
+            	<label for="first-name">שם פרטי</label>
+                <input id="first-name" type="text" ng-model="userData.fname" ng-class="{ 'required' : validation.fnameErr }" />
+                <p class="error" ng-bind-html="validation.fnameErr_txt"></p>
+            </div>
+            
+            <div class="form-field">
+            	<label for="last-name">שם משפחה</label> 
+                <input id="last-name" type="text" ng-model="userData.lname" ng-class="{ 'required' : validation.lnameErr }" />
+                <p class="error" ng-bind-html="validation.lnameErr_txt"></p>  
+            </div>
+            
+            <div class="form-field">
+            	<label for="user-mail">מייל</label>
+                <input id="user-mail" type="email" ng-model="userData.email" ng-class="{ 'required' : validation.emailErr }" />
+                <p class="error" ng-bind-html="validation.emailErr_txt"></p>
+            </div>
+            
+            <div class="form-field">
+            	<label for="phone">טלפון</label>
+                <input ng-model="userData.phone" id="phone" name="phone" type="tel" ng-class="{ 'required' : validation.phoneErr }" >
+                <p class="error" ng-bind-html="validation.phoneErr_txt"></p>
+            </div>
+            
+			<div class="radio-fields" >
+                <input id="gender-male" type="radio" name="gender" value="male">
+                <label for="gender-male"><span><span></span></span>זכר</label>                    
+                <input id="gender-female" type="radio" name="gender" value="female">
+                <label for="gender-female"><span><span></span></span>נקבה</label>                            	
+            </div>            
+            
+            <div class="checkbox" ng-class="{ 'required' : validation.cbErr }">
+                <input id="checkbox" type="checkbox" ng-model="userData.approve" ng-true-value="'1'" ng-false-value="'0'">
+                <label for="checkbox"><span>כדי להמשיך להאזנה לכל המדריכים, עליך לאשר קבלת חומרים פרסומיים מחברת Colmex</span></label>
+            </div>
+            <p class="error cb-error" ng-bind-html="validation.cbErr_txt"></p>
+         
+            <button id="login-btn" class="form-btn" ng-click="loginClick();">התחבר</button>
+            
+		</form>
+    </div>
+    
+</div>

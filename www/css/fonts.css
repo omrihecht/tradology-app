@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+	font-family: 'opensanshebrew';
+	src: url('fonts/opensanshebrew-light-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/opensanshebrew-light-webfont.woff') format('woff'),
+		url('fonts/opensanshebrew-light-webfont.ttf') format('truetype'),
+		url('fonts/opensanshebrew-light-webfont.svg#opensanshebrew') format('svg');
+	font-weight:200;
+	font-style:normal;
+}
+
+@font-face {
+	font-family: 'opensanshebrew';
+	src: url('fonts/opensanshebrew-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/opensanshebrew-regular-webfont.woff') format('woff'),
+		url('fonts/opensanshebrew-regular-webfont.ttf') format('truetype'),
+		url('fonts/opensanshebrew-regular-webfont.svg#opensanshebrew') format('svg');
+	font-weight:400;
+	font-style:normal;
+}
+
+@font-face {
+	font-family: 'opensanshebrew';
+	src: url('fonts/opensanshebrew-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/opensanshebrew-bold-webfont.woff') format('woff'),
+		url('fonts/opensanshebrew-bold-webfont.ttf') format('truetype'),
+		url('fonts/opensanshebrew-bold-webfont.svg#opensanshebrew') format('svg');
+	font-weight:600;
+	font-style:normal;
+}
+
+@font-face {
+	font-family: 'opensanshebrew';
+	src: url('fonts/opensanshebrew-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/opensanshebrew-extrabold-webfont.woff') format('woff'),
+		url('fonts/opensanshebrew-extrabold-webfont.ttf') format('truetype'),
+		url('fonts/opensanshebrew-extrabold-webfont.svg#opensanshebrew') format('svg');
+	font-weight:800;
+	font-style:normal;
+}

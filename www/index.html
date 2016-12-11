@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="ngColmexApp">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;">
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/main.css">
+
+<title>Tradology</title>
+
+</head>
+
+<body ontouchstart="">
+
+	<div id="main-content" ng-controller="Grid" ng-class="{ en : langEn }" >
+    	
+        <div id="loading" ng-include src="partials.loading" ng-show="showGrid.loading" ng-class="{ 'fade-out' : showGrid.fadeLoading }" ></div>
+        
+        <header id="header" ng-include src="partials.header" ng-show="showGrid.header" ng-class="{ 'slide-header' : showGrid.slideHeader }" ></header>
+        
+    	<div ng-view=""></div>
+        
+        <footer id="footer" ng-include src="partials.footer" ng-show="showGrid.footer" ng-class="{ 'show-sub-menu' : showSubMenu , 'slide-footer' : showGrid.slideFooter }" ></footer>
+    
+    </div>
+    
+    <div id="no-internet-pop">
+        <div class="pop">
+            <div class="close-btn"><span class="fa fa-times-circle"></span></div>
+            <p class="he">אפלקצייה זו דורשת חיבור אינטרנט פעיל</p>
+            <p class="en">This app requires an active internet connection</p>
+        </div>
+    </div>    
+
+</body>
+
+<script src="cordova.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/mobile-detect.min.js"></script>
+<script src="js/intlTelInput.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/angular-touch.min.js"></script>
+<script src="js/mn-touch.js"></script>
+<script src="js/angular-setup.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/main.js"></script>
+
+
+</html>

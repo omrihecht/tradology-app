@@ -1,0 +1,6 @@
+.keystore
+platforms/**
+plugins/**
+cert/**
+closure-library/**
+.git

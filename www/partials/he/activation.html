@@ -1,0 +1,27 @@
+<div id="activation">
+	
+    <div class="scroll-content">
+    	
+        <div class="activation-form-holder" ng-show="!showThanks">
+        
+            <p class="title">שלחנו אליך SMS עם קוד על-מנת<br>לאמת את זהותך, מיד תקבל אותו.</p>
+            
+            <div class="form-field">
+                <label for="activation-sms">הזן את הקוד כאן:</label>
+                <input id="activation-sms" type="tel" ng-model="activation.sms" ng-class="{ 'required' : validation.smsErr }" maxlength="6" />
+            </div>    
+                    
+            <button id="sms-submit" class="form-btn" ng-click="smsSubmitClick();">המשך</button>
+            <p class="error" ng-bind-html="validation.smsErr_txt"></p>
+            <button id="resend-sms-btn" ng-click="resendSMS();"  ng-class="{ 'on-resend' : onResend }">לא קיבלת SMS? לחץ כאן</button>
+            <button id="back-to-login-btn" ng-click="backgToLoginClick();">לא בטוח שהזנת מספר טלפון תקין? לחץ כאן</button>
+        
+        </div>
+        
+        <div class="thanks" ng-show="showThanks" ng-show="!showThanks" >
+            <h2 ng-bind-html="form_return_msg" ></h2>
+        </div>        
+        
+    </div>
+    
+</div>

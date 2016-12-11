@@ -1,0 +1,124 @@
+
+
+<div id="guide-ui" class="unselectable" ng-class="{ 'on-audio' : audioStatus.onAudio }" >
+	
+    <div class="scroll-content">
+    
+        <ul class="guide-list">
+            <li class="guide-li" ng-repeat="guide in audioGuides" ng-init="guide.index = $index">
+                <div class="guide-btn" ng-class="{ 'soon' : guide.soon }" ng-click="parentClick( guide , '' );" >
+                    <div class="img-holder img-holder-default" style="background-image:url('{{ guide.bg_img }}');"></div>
+                    <div class="guide-info">
+                        <p class="soon-txt">Soon</p> 
+                        <h2 class="title">{{ guide.title }}</h2>
+                        <div class="time"><span class="icon fa fa-clock-o"></span>{{ formatTime( guide.audio_length ) }}</div>
+                    </div>
+                    <div class="arrow"><span class="fa fa-angle-down"></span></div>
+                </div>
+                
+                <ul class="chapter-list">
+                
+                    <div ng-class="{ 'show-last-pos' : guide.hasLastPos }" class="last-pos-btn-holder">
+                    	<button ng-click="playLastPosClick( guide );" class="play-last-pos-btn">Continue from last position</button>
+                    </div>
+                	
+                    <li class="chapter-li" index="$index" ng-repeat="chapter in guide.children" ng-init="chapter.index = $index">
+                        <div class="chapter-btn" ng-click="parentClick( guide , chapter );">
+                            <div class="chapter-info">
+                                <h3 class="chapter-index">Chapter {{ chapter.index + 1 }}</h3>
+                                <h2 class="title">{{ chapter.title }}</h2>
+                                <div class="time"><span class="icon fa fa-clock-o"></span>{{ formatTime( chapter.audio_length ) }}</div>
+                            </div>
+                            <div class="arrow"><span class="fa fa-angle-down"></span></div>
+                            <!--<div class="complete-time">Chapter Complete Time : {{ formatTime( chapter.complete_time ) }}</div>-->
+                        </div>
+                        
+                        <ul>
+                            <li ng-repeat="audio in chapter.children" ng-init="audio.index = $index" >
+                                <div class="audio-btn" ng-click="audioBtnClick( guide , chapter , audio );" ng-class="{ 'is-complete' : audio.isComplete }" >
+                                    <div class="complete-indicator"><img class="icon-v svg" src="images/icon-v.svg" alt="" /></div>
+                                    <div class="audio-info">
+                                        <h2 class="title">{{ audio.title }}</h2>
+                                        <div class="time"><span class="icon fa fa-clock-o"></span>{{ formatTime( audio.audio_length ) }}</div>
+                                    </div>
+                                    <div class="icon-play"><div class="icon"><img class="svg" src="images/icon-play-small.svg" /></div></div>
+                                </div>
+                            </li><!-- audio li -->
+                        </ul><!-- audio ul -->   
+                        
+                    </li><!-- chapter li -->
+                </ul><!-- chapter ul -->
+                
+            </li><!-- guide li -->
+        </ul><!-- guide-list ul -->
+    
+    </div><!-- scroll-content -->
+    
+</div>
+
+<div id="audio-player" ng-class="{ 'on-audio' : audioStatus.onAudio }" >
+	<div class="back-to-list-btn unselectable" ng-click="backBtnClick();" >
+		<div class="arrow"><span class="fa fa-angle-left"></span></div>
+        <div class="audio-info">
+			<h2 class="guide-title">{{ audioPlayerParams.guide.title }}</h2>
+        	<h3 class="chapter-num">Chapter {{ (audioPlayerParams.chapter.index + 1) }}</h3>
+            <h3 class="chapter-title">{{ audioPlayerParams.chapter.title }}</h3>
+        </div>
+    </div>
+    
+    <div id="audio-status-bar" class="unselectable" mn-touch tap="scrubTime($event);" >
+    	<div class="load-bar"></div>
+    	<div class="prog-bar"></div>
+        <span class="cur-time">{{ audioPlayerParams.cur_time }}</span>
+        <span class="total-time">{{ audioPlayerParams.total_time }}</span>
+        <div class="scrubber"><span class="fa fa-angle-left"></span><span class="fa fa-angle-right"></span></div>
+    </div>
+        
+    <div id="audio-book">
+    	<div class="scroll-content">
+            <div class="book-cover" style="background-image:url('{{ audioPlayerParams.guide.bg_img }}')"; >
+                <h2 class="book-title">{{ audioPlayerParams.guide.bookObj.title }}</h2>
+            </div>
+            <div class="book-content">
+                <div class="book-content-list">
+                    <p class="content-list-title">Chapter list:</p>
+                    <p class="content-link" link="chapter-{{ $index }}" ng-click="bookChapterClick();" ng-repeat="chapter in audioPlayerParams.guide.bookObj.chapters">{{ chapter.title }}</p>
+                </div>
+                <div class="book-chapters">
+                    <div class="book-chapter" id="chapter-{{ $index }}" ng-repeat="chapter in audioPlayerParams.guide.bookObj.chapters" >
+                        <h2 ng-bind-html="chapter.title"></h2>
+                        <div class="sub-chapter sub-chapter-{{ $index }}" ng-repeat="sub_chapter in chapter.chapters">
+                            <h3 ng-bind-html="sub_chapter.title"></h3>
+                            <div ng-bind-html="sub_chapter.text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="audio-ui" class="unselectable">
+		<audio id="audio-element" preload="metadata" autoplay>
+        	<source src="{{ audio_src }}" type="audio/mpeg"/>
+        </audio>
+        
+        <h2 class="audio-title">{{ audioPlayerParams.audio.title }}</h2>
+        
+        <button class="audio-btn toggle-play-btn" mn-touch tap="togglePlayClick();" ng-class="{ 'paused' : onAudioPause }" >
+        	<img class="icon-play svg" src="images/icon-play.svg" alt="" />
+            <img class="icon-pause svg" src="images/icon-pause.svg" alt="" />
+        </button>
+        
+        <button class="audio-btn prev-30sec-btn" ng-click="prev30secClick();"><img class="svg" src="images/icon-30sec-rw.svg" alt="" /></button>
+        <button class="audio-btn next-30sec-btn" ng-click="next30secClick();"><img class="svg" src="images/icon-30sec-ff.svg" alt="" /></button>
+                
+        <button ng-show=" !audioPlayerParams.firstTrack " class="audio-btn prev-chapter-btn" ng-click="prevChapterClick();"><span class="fa fa-angle-left"></span> Previoue chpater</button>
+        <button ng-show=" !audioPlayerParams.lastTrack " class="audio-btn next-chapter-btn" ng-click="nextChapterClick();">Next chapter <span class="fa fa-angle-right"></span></button>
+          
+    </div>
+    
+</div>
+
+
+
+

@@ -1,0 +1,50 @@
+
+<div id="trade-form-page">
+	<div class="scroll-content"> 
+    
+        <form id="trade-form" method="post" ng-show="!showThanks">
+            <h2>מלא פרטים וקבל לינק להורדת הדמו של <img class="colmex-pro-logo" src="images/logo-colmex-pro.png" alt="Colmex Pro" /></h2>
+            
+            <div class="form-field">
+            	<label for="first-name">שם פרטי</label>
+                <input ng-class="{ 'required' : validation.fnameErr }" ng-model="tradeForm.fname" id="first-name" name="first_name" type="text">
+                <p ng-bind-html="validation.fnameErr_txt" class="error"></p> 
+            </div>
+            
+            <div class="form-field">
+            	<label for="last-name">שם משפחה</label>
+                <input ng-class="{ 'required' : validation.lnameErr }" ng-model="tradeForm.lname" id="last-name" name="lname" type="text">
+                <p ng-bind-html="validation.lnameErr_txt" class="error"></p> 
+            </div>  
+            
+            <div class="form-field">
+            	<label for="email">מייל</label>
+                <input ng-class="{ 'required' : validation.emailErr }" ng-model="tradeForm.email" id="email" name="email" type="email">
+                <p ng-bind-html="validation.emailErr_txt" class="error"></p> 
+            </div>                      
+            
+            <div class="form-field">
+				<label for="phone">טלפון</label>
+                <input ng-class="{ 'required' : validation.phoneErr }" ng-model="tradeForm.phone" id="phone" name="phone" type="tel">
+                <p ng-bind-html="validation.phoneErr_txt" class="error"></p> 
+            </div>
+            
+            <div class="checkbox" ng-class="{ 'required' : validation.cbErr }">
+                <input id="checkbox" type="checkbox" ng-model="tradeForm.approve" ng-true-value="'1'" ng-false-value="'0'" >
+                <label for="checkbox"><span>אני מאשר קבלת חומרים לימודיים ושיווקיים מחברת Colmex</span></label>
+            </div>
+            <p ng-bind-html="validation.cbErr_txt" class="error"></p>            
+           
+            <button id="send-btn" class="form-btn" ng-click="submitFormClick();">שלח</button>
+            
+            <p class="disclaimer">*ניתן להפעיל את מערכת ההדגמה ממחשב נייח בלבד</p>
+                        
+        </form>
+                
+        <div class="thanks" ng-show="showThanks" ng-show="!showThanks" >
+            <h2 ng-bind-html="form_return_msg" ></h2>
+        </div>
+        
+	</div>
+</div>
+

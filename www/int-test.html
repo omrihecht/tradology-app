@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+
+<style type="text/css">
+
+input , select{ display:block; width:200px; }
+.flag-container{ display:none; }
+
+</style>
+
+</head>
+
+<body>
+
+<select id="country" >
+
+</select>
+
+<input type="tel" id="phone" >
+
+<button id="submit">submit</button>
+
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/intlTelInput.min.js"></script>
+
+<script>
+
+var geoCountryCode;
+var _countryCodes = [];
+
+$(document).ready(function(e) {
+	loadCountryCodes();
+});
+
+function loadCountryCodes(){
+    $.ajax({ 
+        type: 'GET', 
+        url: 'json/countryCodes.json', 
+        success: function (data) {
+			for( var i = 0; i<data.countryCodes.length; i++){
+				_countryCodes[i] = {
+					name: data.countryCodes[i][0],
+					iso2: data.countryCodes[i][1],
+					dialCode: data.countryCodes[i][2],
+					priority: data.countryCodes[i][3] || 0,
+					areaCodes: data.countryCodes[i][4] || null
+				};
+			}
+			setSelect();
+			 getCountry();
+        },
+		error: function (jqXHR, textStatus, errorThrown) {
+  			console.log(textStatus, errorThrown);
+		}
+    });
+}
+
+function getCountry(){
+	$.get("http://ipinfo.io", function() {}, "jsonp")
+		.always(function(resp) {
+			geoCountryCode = (resp && resp.country) ? resp.country : "";
+			//$('#country option[iso2="' + geoCountryCode.toLowerCase() + '"]').prop('selected',true).change();
+			//callback(countryCode);
+	});
+}
+
+function setSelect(){
+	for( var i=0; i<_countryCodes.length; i++ ){
+		var option = $('<option value="'+ _countryCodes[i].name.toLocaleLowerCase() +'" iso2="'+ _countryCodes[i].iso2 +'" dialCode="' + _countryCodes[i].dialCode + '" >'+ _countryCodes[i].name +'</option>');
+		$('#country').append(option);
+	}
+	
+	$("#phone").intlTelInput({
+		autoPlaceholder: false,
+		utilsScript: "js/build/utils.js"
+	});	
+	
+	$('#country').change(function(){
+		$('#phone').val( '+' + $("#country option:selected").attr('dialCode') );
+		var countryCode = $('#country option:selected').attr('iso2').toLowerCase();
+		$("#phone").intlTelInput("setCountry", countryCode);
+		/*$('.country-list').removeClass('hide');
+		setTimeout(function(){
+			debugger
+			$('.country-list .country[data-country-code=' + countryCode + ']').trigger('click');
+		},1000);*/
+	});
+	
+	$('#submit').click(function(){
+		if ($.trim($("#phone").val())) {
+			if ($("#phone").intlTelInput("isValidNumber")) {
+				console.log('valid');
+			} else {
+				console.log('not valid');
+			}
+		}
+	});
+}
+
+</script>
+
+
+</body>
+</html>
+
