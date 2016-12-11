@@ -3,3 +3,16 @@
 https://code.tutsplus.com/tutorials/quick-tip-how-to-work-with-github-and-multiple-accounts--net-22574
 git remote add origin git@github-hooligans:omrihecht/tradology-app
 
+
+
+#Default GitHub
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+
+
+Host github-hooligans
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_hooligans
